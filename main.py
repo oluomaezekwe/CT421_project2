@@ -51,8 +51,11 @@ def update_labels(graph, graph_labels, num_labels, max_iter):
             break
 
         node_to_change = random.choice(list(graph.nodes()))
-        new_label = random.choice([label for label in range(num_labels) if label != graph_labels[node_to_change]])
-        graph_labels[node_to_change] = new_label
+
+        neighbors = list(graph.neighbors(node_to_change))
+        if any(graph_labels[node_to_change] == graph_labels[neighbor] for neighbor in neighbors):
+            new_label = random.choice([label for label in range(num_labels) if label != graph_labels[node_to_change]])
+            graph_labels[node_to_change] = new_label
 
         iter_count += 1
     return graph_labels
