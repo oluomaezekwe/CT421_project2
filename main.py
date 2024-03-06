@@ -1,6 +1,8 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
+import time
+
 # random.seed(11)
 
 
@@ -67,6 +69,7 @@ edges = 10
 min_colours = 1
 max_colours = 8
 max_iterations = 1000
+start_time = time.time()
 
 G = create_2d_lattice_graph(nodes, edges)
 labels = label_graph(G, min_colours, max_colours)
@@ -77,6 +80,10 @@ print("Initial Number of Conflicts:", init_conflicts)
 final_labels = update_labels(G, labels, max_colours, max_iterations)
 final_conflicts = count_conflicts(G, final_labels)
 print("Final Number of Conflicts:", final_conflicts)
+
+end_time = time.time()
+runtime_ms = (end_time - start_time) * 1000
+print("Runtime: {:.2f} ms".format(runtime_ms))
 
 nx.draw(G, labels=labels, with_labels=True)
 plt.show()
