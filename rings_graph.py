@@ -36,7 +36,7 @@ def update_labels(graph, graph_labels, num_labels, max_iter):
         iter_count += 1
     return graph_labels
 
-num_nodes = 20
+num_nodes = 100
 min_colours = 1
 max_colours = 8
 max_iterations = 1000
