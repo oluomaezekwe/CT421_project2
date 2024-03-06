@@ -54,7 +54,7 @@ print("Final Number of Conflicts:", final_conflicts)
 
 end_time = time.time()
 runtime_ms = (end_time - start_time) * 1000
-print("Runtime: {:.2f} ms".format(runtime_ms))
+print("Runtime: {:.3f} ms".format(runtime_ms))
 
 nx.draw(G, labels=labels, with_labels=True)
 plt.show()
