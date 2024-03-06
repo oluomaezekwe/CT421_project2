@@ -1,30 +1,31 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import random
+# random.seed(11)
 
 
-def create_2d_lattice_graph(nodes, edges):
+def create_2d_lattice_graph(num_nodes, num_edges):
     graph = nx.Graph()
 
-    for i in range(nodes):
-        for j in range(edges):
+    for i in range(num_nodes):
+        for j in range(num_edges):
             graph.add_node((i, j))
 
-    for i in range(nodes):
-        for j in range(edges):
-            if i < nodes - 1:
+    for i in range(num_nodes):
+        for j in range(num_edges):
+            if i < num_nodes - 1:
                 graph.add_edge((i, j), (i + 1, j))
-            if j < edges - 1:
+            if j < num_edges - 1:
                 graph.add_edge((i, j), (i, j + 1))
 
     return graph
 
 
-def label_graph(graph, min_val, max_val):
+def label_graph(graph, min, max):
     graph_labels = {}
 
     for node in graph.nodes():
-        graph_labels[node] = random.randint(min_val, max_val)
+        graph_labels[node] = random.randint(min, max)
     return graph_labels
 
 
@@ -61,19 +62,19 @@ def update_labels(graph, graph_labels, num_labels, max_iter):
     return graph_labels
 
 
-m = 8
-n = 8
-p = 1
-q = 25
+nodes = 10
+edges = 10
+min_colours = 1
+max_colours = 8
 max_iterations = 1000
 
-G = create_2d_lattice_graph(m, n)
-labels = label_graph(G, p, q)
+G = create_2d_lattice_graph(nodes, edges)
+labels = label_graph(G, min_colours, max_colours)
 
 init_conflicts = count_conflicts(G, labels)
 print("Initial Number of Conflicts:", init_conflicts)
 
-final_labels = update_labels(G, labels, q, max_iterations)
+final_labels = update_labels(G, labels, max_colours, max_iterations)
 final_conflicts = count_conflicts(G, final_labels)
 print("Final Number of Conflicts:", final_conflicts)
 
